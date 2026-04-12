@@ -4,7 +4,7 @@
    NEW: feature modals, job suggestions, filename gen, recent banner
 ══════════════════════════════════════════════════════════ */
 
-const API_URL = "http://localhost:5000/analyze";
+const API_URL = "https://resumerank-w8h2.onrender.com/analyze";
 
 /* ── ROLE DATA ── */
 const ROLE_KW_PREVIEW = {
