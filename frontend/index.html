@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <title>ResumeRank — AI-Powered ATS Analyzer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">
+      <div class="logo-mark">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <rect width="22" height="22" rx="6" fill="url(#lg1)"/>
+          <path d="M6 7h10M6 11h7M6 15h9" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cx="16" cy="15" r="3" fill="#a78bfa" stroke="white" stroke-width="1.2"/>
+          <defs><linearGradient id="lg1" x1="0" y1="0" x2="22" y2="22"><stop offset="0%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#2563eb"/></linearGradient></defs>
+        </svg>
+      </div>
+      <span class="logo-text">ResumeRank</span>
+      <span class="logo-badge">AI</span>
+    </a>
+    <div class="nav-links">
+      <a href="#features" class="nav-link">Features</a>
+      <a href="#how-it-works" class="nav-link">How it works</a>
+      <a href="#analyzer" class="nav-link">Analyzer</a>
+      <a href="#tips-section" class="nav-link">ATS Tips</a>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="t-sun">☀</span><span class="t-moon">◑</span>
+      </button>
+      <a href="#analyzer" class="btn-nav-cta">Try Free →</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#features" class="m-link">Features</a>
+    <a href="#how-it-works" class="m-link">How it works</a>
+    <a href="#analyzer" class="m-link">Analyzer</a>
+    <a href="#tips-section" class="m-link">Tips</a>
+    <a href="#analyzer" class="btn-nav-cta" style="display:inline-block;margin-top:12px">Try Free →</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero-section" id="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+  </div>
+  <div class="hero-content" data-aos="fade-up">
+    <div class="hero-eyebrow"><span class="ey-dot"></span>Free AI-Powered ATS Analyzer</div>
+    <h1 class="hero-title">Your Resume <span class="grad-text">Deserves</span><br class="hero-br"/> to Get Seen</h1>
+    <p class="hero-sub">75% of resumes are rejected by ATS before a human reads them. ResumeRank uses real AI to score, analyze, and fix your resume in seconds.</p>
+    <div class="hero-ctas">
+      <a href="#analyzer" class="btn-hero-primary"><span class="btn-glow" aria-hidden="true"></span>Analyze My Resume <span aria-hidden="true">→</span></a>
+      <a href="#how-it-works" class="btn-hero-ghost">How it works ↓</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hs"><strong>12K+</strong><span>Analyzed</span></div>
+      <div class="hs-div" aria-hidden="true"></div>
+      <div class="hs"><strong>AI</strong><span>Feedback</span></div>
+      <div class="hs-div" aria-hidden="true"></div>
+      <div class="hs"><strong>Free</strong><span>Forever</span></div>
+    </div>
+  </div>
+  <div class="scroll-ind" aria-hidden="true"><div class="si-dot"></div></div>
+</section>
+
+<!-- ═══ RECENT ANALYSIS BANNER ═══ -->
+<div class="recent-banner" id="recentBanner" style="display:none">
+  <div class="rb-inner">
+    <div class="rb-left">
+      <span class="rb-icon">📋</span>
+      <div>
+        <div class="rb-title">Recent Analysis Found</div>
+        <div class="rb-sub" id="rbSub">Your last resume analysis is saved</div>
+      </div>
+    </div>
+    <div class="rb-right">
+      <button class="rb-btn" id="rbLoad">View Results</button>
+      <button class="rb-close" id="rbClose" aria-label="Dismiss">✕</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FEATURES ═══ -->
+<section class="features-section" id="features">
+  <div class="section-wrap">
+    <div class="s-header" data-aos="fade-up">
+      <div class="s-eyebrow">Why ResumeRank</div>
+      <h2 class="s-title">Real AI. Real Results.<br/><span class="grad-text">Not guesswork.</span></h2>
+      <p class="s-desc">Powered by LLaMA 3 AI — the same technology used by top tech companies.</p>
+    </div>
+    <div class="features-grid">
+      <!-- Each card has data-feature for modal trigger -->
+      <div class="feat-card" data-aos="fade-up" data-aos-delay="0" data-feature="score" tabindex="0" role="button" aria-label="Learn about AI Scoring">
+        <div class="fi purple"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M11 7v4l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h3>AI Summary & Verdict</h3>
+        <p>Get a recruiter-level AI assessment — not just a score, but a full personalized breakdown.</p>
+        <span class="ft purple">LLaMA 3 AI</span>
+        <span class="feat-arrow" aria-hidden="true">→</span>
+      </div>
+      <div class="feat-card featured" data-aos="fade-up" data-aos-delay="80" data-feature="keywords" tabindex="0" role="button" aria-label="Learn about keyword matching">
+        <div class="feat-badge">Most Used</div>
+        <div class="fi blue"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 6h16M3 11h10M3 16h13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h3>Role-Based Keyword Match</h3>
+        <p>Compare your resume against 10+ job roles. See exact keyword gaps for your target position.</p>
+        <span class="ft blue">Dynamic</span>
+        <span class="feat-arrow" aria-hidden="true">→</span>
+      </div>
+      <div class="feat-card" data-aos="fade-up" data-aos-delay="160" data-feature="dashboard" tabindex="0" role="button" aria-label="Learn about the dashboard">
+        <div class="fi green"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 16l4-4 3 3 7-9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>5-Tab Dashboard</h3>
+        <p>Full analysis across 5 tabs: Score, Keywords, Strengths, AI Suggestions, and Expert Tips.</p>
+        <span class="ft green">Interactive</span>
+        <span class="feat-arrow" aria-hidden="true">→</span>
+      </div>
+      <div class="feat-card" data-aos="fade-up" data-aos-delay="240" data-feature="rewrite" tabindex="0" role="button" aria-label="Learn about AI rewrite">
+        <div class="fi amber"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 3l2 6h6l-5 3.5 2 6L11 15l-5 3.5 2-6L3 9h6z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+        <h3>AI Rewrite Suggestions</h3>
+        <p>AI shows you a before/after rewrite of your weakest bullet — instantly actionable improvement.</p>
+        <span class="ft amber">AI-Powered</span>
+        <span class="feat-arrow" aria-hidden="true">→</span>
+      </div>
+      <div class="feat-card" data-aos="fade-up" data-aos-delay="320" data-feature="recruiter" tabindex="0" role="button" aria-label="Learn about recruiter view">
+        <div class="fi pink"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="7" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M3 19c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h3>Recruiter View Mode</h3>
+        <p>See your resume through a recruiter's eyes — what they notice in the first 10 seconds.</p>
+        <span class="ft pink">Unique</span>
+        <span class="feat-arrow" aria-hidden="true">→</span>
+      </div>
+      <div class="feat-card" data-aos="fade-up" data-aos-delay="400" data-feature="report" tabindex="0" role="button" aria-label="Learn about PDF report">
+        <div class="fi teal"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 14v4a2 2 0 002 2h10a2 2 0 002-2v-4M11 3v12M7 11l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>PDF Report Download</h3>
+        <p>Download a complete report with all scores, feedback, and suggestions to share or save.</p>
+        <span class="ft teal">Export</span>
+        <span class="feat-arrow" aria-hidden="true">→</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FEATURE MODAL ═══ -->
+<div class="feat-modal-overlay" id="featModalOverlay" role="dialog" aria-modal="true" aria-labelledby="featModalTitle">
+  <div class="feat-modal">
+    <button class="fm-close" id="featModalClose" aria-label="Close">✕</button>
+    <div class="fm-body" id="featModalBody"></div>
+  </div>
+</div>
+
+<!-- ═══ HOW IT WORKS ═══ -->
+<section class="how-section" id="how-it-works">
+  <div class="section-wrap">
+    <div class="s-header" data-aos="fade-up">
+      <div class="s-eyebrow">The Process</div>
+      <h2 class="s-title">Upload → AI Analyzes →<br/><span class="grad-text">Get Your Report</span></h2>
+    </div>
+    <div class="steps-row">
+      <div class="step-item" data-aos="fade-up" data-aos-delay="0">
+        <div class="step-num">01</div>
+        <div class="step-ico-wrap"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M7 4h10l7 7v13a2 2 0 01-2 2H7a2 2 0 01-2-2V6a2 2 0 012-2z" stroke="currentColor" stroke-width="1.8"/><path d="M17 4v7h7" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M10 17l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h4>Upload Your PDF</h4>
+        <p>Drag & drop or browse. We extract your resume text instantly.</p>
+      </div>
+      <div class="step-conn" aria-hidden="true"><div class="conn-line"></div><span>→</span></div>
+      <div class="step-item" data-aos="fade-up" data-aos-delay="200">
+        <div class="step-num">02</div>
+        <div class="step-ico-wrap"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="10" stroke="currentColor" stroke-width="1.8"/><path d="M9 14l3 3 7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h4>AI Analyzes Deep</h4>
+        <p>LLaMA 3 AI + engine scan keywords, sections, structure, and impact.</p>
+      </div>
+      <div class="step-conn" aria-hidden="true"><div class="conn-line"></div><span>→</span></div>
+      <div class="step-item" data-aos="fade-up" data-aos-delay="400">
+        <div class="step-num">03</div>
+        <div class="step-ico-wrap"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 22V6a2 2 0 012-2h16a2 2 0 012 2v16" stroke="currentColor" stroke-width="1.8"/><path d="M8 22v-8h4v8M16 22v-5h4v5" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+        <h4>5-Tab Report</h4>
+        <p>Score, keywords, AI feedback, expert tips, and download your report.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ANALYZER SECTION ═══ -->
+<section class="analyzer-section" id="analyzer">
+  <div class="section-wrap">
+    <div class="s-header" data-aos="fade-up">
+      <div class="s-eyebrow">Free AI Tool</div>
+      <h2 class="s-title">Analyze Your Resume<br/><span class="grad-text">Right Now</span></h2>
+      <p class="s-desc">No signup. No email. No credit card. AI feedback in seconds.</p>
+    </div>
+
+    <!-- ── UPLOAD CARD ── -->
+    <div class="analyzer-card" id="analyzerCard" data-aos="fade-up">
+      <div class="role-row">
+        <label class="role-lbl" for="jobRoleSelect">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><rect x="1.5" y="2.5" width="12" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M4.5 2.5V1.5a1 1 0 011-1h4a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+          Target Role
+        </label>
+        <div class="sel-wrap">
+          <select id="jobRoleSelect" class="role-select">
+            <option value="software_dev">Software Developer</option>
+            <option value="frontend">Frontend Developer</option>
+            <option value="backend">Backend Developer</option>
+            <option value="fullstack">Full Stack Developer</option>
+            <option value="data_science">Data Scientist</option>
+            <option value="devops">DevOps Engineer</option>
+            <option value="ui_ux">UI/UX Designer</option>
+            <option value="marketing">Digital Marketer</option>
+            <option value="product">Product Manager</option>
+            <option value="business_analyst">Business Analyst</option>
+          </select>
+          <span class="sel-arrow" aria-hidden="true">▾</span>
+        </div>
+        <div class="role-kw-preview" aria-label="Role keywords">
+          <span class="rkw-label">Keywords:</span>
+          <div class="rkw-pills" id="rkwPills"></div>
+        </div>
+      </div>
+
+      <div class="drop-zone" id="dropZone" role="button" tabindex="0" aria-label="Upload PDF resume">
+        <input type="file" id="fileInput" accept=".pdf" hidden aria-label="Choose PDF file"/>
+        <div class="dz-icon-ring" aria-hidden="true">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><path d="M18 26V12M18 12l-5 5M18 12l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="18" r="17" stroke="currentColor" stroke-width="1.4" stroke-dasharray="3 4"/></svg>
+        </div>
+        <p class="dz-main">Drop your PDF resume here</p>
+        <p class="dz-sub">or <button class="dz-browse" id="browseBtn" type="button">click to browse</button></p>
+        <p class="dz-hint">PDF only · Max 5MB · Text-based PDFs only</p>
+      </div>
+
+      <div class="file-bar" id="fileBar" style="display:none" role="status">
+        <div class="fb-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3h8l4 4v8a1 1 0 01-1 1H3a1 1 0 01-1-1V4a1 1 0 011-1z" stroke="currentColor" stroke-width="1.5"/><path d="M11 3v4h4" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+        <div class="fb-info"><span id="fbName"></span><span id="fbSize"></span></div>
+        <button class="fb-remove" id="fbRemove" type="button" aria-label="Remove file"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      </div>
+
+      <button class="btn-analyze" id="analyzeBtn" disabled type="button">
+        <span>
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" aria-hidden="true"><circle cx="8.5" cy="8.5" r="6.5" stroke="currentColor" stroke-width="1.7"/><path d="M6 8.5l2 2 3.5-3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          Analyze Resume with AI
+        </span>
+      </button>
+    </div>
+
+    <!-- ── LOADING STATE ── -->
+    <div class="loading-state" id="loadingState" style="display:none" role="status" aria-live="polite">
+      <div class="ld-ring-wrap" aria-hidden="true">
+        <svg viewBox="0 0 80 80" width="80" height="80">
+          <circle cx="40" cy="40" r="34" fill="none" stroke="var(--border-color)" stroke-width="6"/>
+          <circle id="ldArc" cx="40" cy="40" r="34" fill="none" stroke="url(#ldg)" stroke-width="6" stroke-linecap="round" stroke-dasharray="80 134" transform="rotate(-90 40 40)"/>
+          <defs><linearGradient id="ldg"><stop offset="0%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#2563eb"/></linearGradient></defs>
+        </svg>
+        <span class="ld-pct" id="ldPct">0%</span>
+      </div>
+      <p class="ld-title" id="ldTitle">Parsing resume…</p>
+      <div class="ld-steps">
+        <div class="ld-step" id="ls1"><div class="ld-dot"></div>Parsing PDF</div>
+        <div class="ld-step" id="ls2"><div class="ld-dot"></div>Analyzing Skills</div>
+        <div class="ld-step" id="ls3"><div class="ld-dot"></div>Matching Keywords</div>
+        <div class="ld-step" id="ls4"><div class="ld-dot"></div>AI Generating Feedback</div>
+        <div class="ld-step" id="ls5"><div class="ld-dot"></div>Building Report</div>
+      </div>
+      <div class="prog-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="prog-fill" id="progFill"></div>
+      </div>
+    </div>
+
+    <!-- ═══ RESULTS SHELL ═══ -->
+    <div class="results-shell" id="resultsShell" style="display:none">
+
+      <!-- Top bar: AI badge + actions -->
+      <div class="results-topbar">
+        <div class="ai-badge" id="aiBadge">
+          <span class="ai-dot" aria-hidden="true"></span>
+          <span id="aiBadgeText">AI Analysis</span>
+        </div>
+        <div class="rd-actions">
+          <button class="rd-btn" id="downloadReportBtn" type="button">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 2v8M4 7l3 3 3-3M2 12h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Download Report
+          </button>
+          <button class="rd-btn" id="resetBtn" type="button">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7a5 5 0 1010 0 5 5 0 00-10 0zM2 7V3M2 7H6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            New Analysis
+          </button>
+        </div>
+      </div>
+
+      <!-- Slide tabs -->
+      <div class="slide-tabs" id="slideTabs" role="tablist">
+        <button class="stab active" data-slide="0" role="tab" aria-selected="true" aria-controls="slide-0">Score</button>
+        <button class="stab" data-slide="1" role="tab" aria-selected="false" aria-controls="slide-1">Keywords</button>
+        <button class="stab" data-slide="2" role="tab" aria-selected="false" aria-controls="slide-2">Strengths</button>
+        <button class="stab" data-slide="3" role="tab" aria-selected="false" aria-controls="slide-3">AI Feedback</button>
+        <button class="stab" data-slide="4" role="tab" aria-selected="false" aria-controls="slide-4">Expert Tips</button>
+      </div>
+
+      <!-- Slides -->
+      <div class="slides-viewport" id="slidesViewport">
+        <div class="slides-track" id="slidesTrack">
+
+          <!-- SLIDE 0: SCORE -->
+          <div class="slide" id="slide-0" role="tabpanel">
+            <div class="slide-inner">
+              <!-- Score ring + metrics grid -->
+              <div class="score-layout">
+                <div class="score-ring-card">
+                  <div class="sc-wrap">
+                    <svg class="score-svg" viewBox="0 0 140 140" width="160" height="160" aria-hidden="true">
+                      <circle cx="70" cy="70" r="56" fill="none" stroke="var(--border-color)" stroke-width="12"/>
+                      <circle id="scoreArc" cx="70" cy="70" r="56" fill="none" stroke="#7c3aed" stroke-width="12" stroke-linecap="round" stroke-dasharray="352" stroke-dashoffset="352" transform="rotate(-90 70 70)"/>
+                    </svg>
+                    <div class="sc-overlay" aria-live="polite">
+                      <span class="sc-num" id="scNum" aria-label="ATS Score">0</span>
+                      <span class="sc-of" aria-hidden="true">/100</span>
+                      <span class="sc-grade" id="scGrade">—</span>
+                    </div>
+                  </div>
+                  <p class="sc-verdict" id="scVerdict"></p>
+                </div>
+
+                <!-- 4 metric bars in 2x2 grid -->
+                <div class="metrics-grid">
+                  <div class="metric-item">
+                    <div class="mi-header"><span class="mi-label">ATS Score</span><span class="mi-val" id="mbAts">0</span></div>
+                    <div class="mi-track"><div class="mi-fill purple" id="mbAtsF"></div></div>
+                  </div>
+                  <div class="metric-item">
+                    <div class="mi-header"><span class="mi-label">Job Match</span><span class="mi-val" id="mbMatch">0</span></div>
+                    <div class="mi-track"><div class="mi-fill blue" id="mbMatchF"></div></div>
+                  </div>
+                  <div class="metric-item">
+                    <div class="mi-header"><span class="mi-label">Keyword Match</span><span class="mi-val" id="mbKw">0%</span></div>
+                    <div class="mi-track"><div class="mi-fill green" id="mbKwF"></div></div>
+                  </div>
+                  <div class="metric-item">
+                    <div class="mi-header"><span class="mi-label">Readability</span><span class="mi-val" id="mbRead">0</span></div>
+                    <div class="mi-track"><div class="mi-fill amber" id="mbReadF"></div></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 4 stat chips row -->
+              <div class="stat-chips-row">
+                <div class="stat-chip"><span class="sc-v" id="msWc">—</span><span class="sc-l">Words</span></div>
+                <div class="stat-chip"><span class="sc-v" id="msAv">—</span><span class="sc-l">Action Verbs</span></div>
+                <div class="stat-chip"><span class="sc-v" id="msQa">—</span><span class="sc-l">Quantified</span></div>
+                <div class="stat-chip"><span class="sc-v" id="msSk">—</span><span class="sc-l">Skills Found</span></div>
+              </div>
+
+              <!-- Contact + sections -->
+              <div class="info-cols">
+                <div class="info-col">
+                  <div class="ic-title">Contact Info</div>
+                  <div class="ic-chips" id="contactChips"></div>
+                </div>
+                <div class="info-col">
+                  <div class="ic-title">Sections Found</div>
+                  <div class="ic-chips" id="sectionChips"></div>
+                </div>
+                <div class="info-col">
+                  <div class="ic-title">Missing Sections</div>
+                  <div class="ic-chips" id="missingSectionChips"></div>
+                </div>
+              </div>
+
+              <!-- AI Summary card -->
+              <div class="summary-card">
+                <div class="scard-hd">
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><circle cx="7.5" cy="7.5" r="6" stroke="currentColor" stroke-width="1.4"/><path d="M7.5 5v3.5M7.5 10.5h.01" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                  AI Assessment
+                </div>
+                <p class="scard-body" id="sumBody">—</p>
+                <div class="scard-verdict" id="sumVerdict"></div>
+              </div>
+
+              <!-- Recruiter view card -->
+              <div class="recruiter-card">
+                <div class="rec-hd">
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><circle cx="7.5" cy="5" r="3" stroke="currentColor" stroke-width="1.4"/><path d="M2 13.5c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                  Recruiter View — First 10 Seconds
+                </div>
+                <p class="rec-body" id="recBody">—</p>
+              </div>
+
+              <!-- Job role suggestions -->
+              <div class="role-suggest-card" id="roleSuggestCard" style="display:none">
+                <div class="rs-hd">
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M7.5 1.5l1.5 4.5H14L9.5 9l1.5 4.5L7.5 11l-4 2.5 1.5-4.5L1 6h5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+                  You Can Also Apply For
+                </div>
+                <div class="rs-chips" id="roleSuggestChips"></div>
+              </div>
+
+              <!-- Filename suggestion -->
+              <div class="filename-card" id="filenameCard" style="display:none">
+                <div class="fn-hd">
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M3 2h6l3 3v8a1 1 0 01-1 1H3a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.4"/></svg>
+                  Suggested Filename
+                </div>
+                <div class="fn-row">
+                  <code class="fn-name" id="fnName">Resume.pdf</code>
+                  <button class="fn-copy" id="fnCopy" type="button">Copy</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SLIDE 1: KEYWORDS -->
+          <div class="slide" id="slide-1" role="tabpanel">
+            <div class="slide-inner">
+              <div class="slide-title-row">
+                <h3>Skills & Keywords Match</h3>
+                <span class="match-badge" id="matchPctBadge">0% Match</span>
+              </div>
+
+              <div class="match-bars-card">
+                <div class="mb-row"><span class="mb-lbl">Job Match Score</span><div class="mb-track"><div class="mb-fill blue" id="kSlideMatch"></div></div><span class="mb-val" id="kSlideMatchV">—</span></div>
+                <div class="mb-row"><span class="mb-lbl">ATS Score</span><div class="mb-track"><div class="mb-fill purple" id="kSlideAts"></div></div><span class="mb-val" id="kSlideAtsV">—</span></div>
+              </div>
+
+              <div class="kw-panels">
+                <div class="kw-panel">
+                  <div class="kwp-hd found-hd">
+                    <span>✓ Found</span>
+                    <span class="kwp-cnt green" id="kwFndCount">0</span>
+                  </div>
+                  <div class="kw-chips-wrap" id="kwFndChips"></div>
+                </div>
+                <div class="kw-panel">
+                  <div class="kwp-hd miss-hd">
+                    <span>✗ Missing</span>
+                    <span class="kwp-cnt red" id="kwMissCount">0</span>
+                  </div>
+                  <div class="kw-chips-wrap" id="kwMissChips"></div>
+                </div>
+              </div>
+
+              <div class="top5-card">
+                <div class="t5-hd">★ Top 5 Missing Keywords — Add These First</div>
+                <div class="t5-list" id="top5List"></div>
+              </div>
+
+              <div class="skills-card">
+                <div class="sk-hd">All Detected Skills</div>
+                <div class="skills-chips-wrap" id="skillsChips"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SLIDE 2: STRENGTHS + WEAKNESSES -->
+          <div class="slide" id="slide-2" role="tabpanel">
+            <div class="slide-inner">
+              <div class="slide-title-row"><h3>Strengths & Weaknesses</h3></div>
+
+              <div class="sw-grid">
+                <div class="sw-col">
+                  <div class="sw-hd sw-green">✓ Strengths</div>
+                  <ul class="sw-list" id="strengthsList"></ul>
+                </div>
+                <div class="sw-col">
+                  <div class="sw-hd sw-red">⚠ Weaknesses</div>
+                  <ul class="sw-list" id="weaknessesList"></ul>
+                </div>
+              </div>
+
+              <div class="rewrite-card">
+                <div class="rw-hd">→ AI Instant Rewrite Suggestion</div>
+                <div class="rw-body" id="rwBody">Loading…</div>
+              </div>
+
+              <div class="ba-card">
+                <div class="ba-hd">Score Potential — Before vs. After Fixes</div>
+                <div class="ba-rows">
+                  <div class="ba-row"><span class="ba-l">Current</span><div class="ba-track"><div class="ba-fill cur" id="baCur"></div></div><span class="ba-v" id="baCurV">—</span></div>
+                  <div class="ba-row"><span class="ba-l">After Fixes</span><div class="ba-track"><div class="ba-fill pot" id="baPot"></div></div><span class="ba-v" id="baPotV">—</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SLIDE 3: AI SUGGESTIONS -->
+          <div class="slide" id="slide-3" role="tabpanel">
+            <div class="slide-inner">
+              <div class="slide-title-row">
+                <h3>AI-Generated Suggestions</h3>
+                <button class="copy-btn" id="copySuggestionsBtn" type="button">Copy All</button>
+              </div>
+
+              <ul class="sugg-list" id="suggList"></ul>
+
+              <div class="linkedin-card">
+                <div class="li-hd">
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><rect x="1.5" y="1.5" width="12" height="12" rx="2.5" stroke="currentColor" stroke-width="1.4"/><path d="M5 6.5v4.5M5 4.5h.01M8 11V8c0-1 .5-1.5 1.5-1.5S11 7 11 8v3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                  LinkedIn Optimization Tips
+                </div>
+                <ul class="li-list" id="liList"></ul>
+              </div>
+
+              <div class="preview-card">
+                <div class="prev-hd">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 3h10M2 7h6M2 11h8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                  Extracted Text Preview
+                  <button class="prev-toggle" id="prevToggle" type="button">Show ▾</button>
+                </div>
+                <div class="prev-body" id="prevBody" style="display:none">
+                  <pre class="prev-text" id="prevText"></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SLIDE 4: EXPERT TIPS -->
+          <div class="slide" id="slide-4" role="tabpanel">
+            <div class="slide-inner">
+              <div class="slide-title-row">
+                <h3>Expert ATS Tips</h3>
+                <span class="tips-role-tag" id="tipsRoleTag"></span>
+              </div>
+              <div class="ats-tips-grid" id="atsTipsGrid"></div>
+              <div class="linkedin-tips-card">
+                <div class="ltc-hd">LinkedIn Profile Optimization</div>
+                <div class="li-tips-grid" id="liTipsGrid"></div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /slides-track -->
+      </div><!-- /slides-viewport -->
+
+      <!-- Slide nav -->
+      <div class="slide-nav">
+        <button class="snav-btn" id="slidePrev" disabled type="button" aria-label="Previous slide">←</button>
+        <div class="slide-dots" id="slideDots" role="navigation" aria-label="Slide navigation"></div>
+        <button class="snav-btn" id="slideNext" type="button" aria-label="Next slide">→</button>
+      </div>
+
+    </div><!-- /results-shell -->
+
+    <!-- Error state -->
+    <div class="error-state" id="errorState" style="display:none" role="alert">
+      <div class="err-ico" aria-hidden="true">⚠</div>
+      <p class="err-title">Analysis Failed</p>
+      <p class="err-detail" id="errDetail">Could not reach server.</p>
+      <button class="btn-reset" id="errRetry" type="button">Try Again</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ ATS TIPS SLIDER ═══ -->
+<section class="tips-section" id="tips-section">
+  <div class="section-wrap">
+    <div class="s-header" data-aos="fade-up">
+      <div class="s-eyebrow">Expert Knowledge</div>
+      <h2 class="s-title">ATS Secrets Most<br/><span class="grad-text">Candidates Miss</span></h2>
+    </div>
+    <div class="tips-wrap" data-aos="fade-up">
+      <div class="tips-overflow">
+        <div class="tips-track" id="tipsTrack">
+          <div class="tip-slide"><div class="tip-n">01</div><h4>Use Standard Section Headers</h4><p>ATS parses "Work Experience" easily. Avoid creative headers like "My Story" — bots aren't impressed by creativity.</p><span class="tip-tag">Formatting</span></div>
+          <div class="tip-slide"><div class="tip-n">02</div><h4>Mirror the Job Description</h4><p>Copy exact phrases from the job posting. If they say "cross-functional collaboration", use those exact words.</p><span class="tip-tag">Keywords</span></div>
+          <div class="tip-slide"><div class="tip-n">03</div><h4>Avoid Tables and Columns</h4><p>Multi-column layouts break ATS parsing. Use a clean single-column format only for best compatibility.</p><span class="tip-tag">Layout</span></div>
+          <div class="tip-slide"><div class="tip-n">04</div><h4>Choose the Right File Type</h4><p>Save as FirstName_LastName_Role.pdf — clean filenames signal professionalism. Avoid spaces and special characters.</p><span class="tip-tag">File Format</span></div>
+          <div class="tip-slide"><div class="tip-n">05</div><h4>Quantify Every Achievement</h4><p>"Led a team of 5 to deliver a feature 2 weeks early, improving velocity by 30%" beats any vague statement.</p><span class="tip-tag">Impact</span></div>
+          <div class="tip-slide"><div class="tip-n">06</div><h4>Never Embed Keywords in Images</h4><p>Skill bars, icons with text, and image-based layouts are completely invisible to ATS scanners.</p><span class="tip-tag">Parsing</span></div>
+          <div class="tip-slide"><div class="tip-n">07</div><h4>Tailor Every Application</h4><p>Generic resumes score 30% lower on average. Take 10 minutes to customize keywords for each job posting.</p><span class="tip-tag">Strategy</span></div>
+        </div>
+      </div>
+      <div class="tips-ctrl">
+        <button class="tips-btn" id="tipsPrev" type="button" aria-label="Previous tip">←</button>
+        <div class="tips-dots" id="tipsDots" role="navigation" aria-label="Tips navigation"></div>
+        <button class="tips-btn" id="tipsNext" type="button" aria-label="Next tip">→</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="nav-logo" style="gap:10px;justify-content:center">
+      <div class="logo-mark"><svg width="20" height="20" viewBox="0 0 22 22" fill="none"><rect width="22" height="22" rx="6" fill="url(#lg2)"/><path d="M6 7h10M6 11h7M6 15h9" stroke="white" stroke-width="1.8" stroke-linecap="round"/><circle cx="16" cy="15" r="3" fill="#a78bfa" stroke="white" stroke-width="1.2"/><defs><linearGradient id="lg2" x1="0" y1="0" x2="22" y2="22"><stop offset="0%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#2563eb"/></linearGradient></defs></svg></div>
+      <span class="logo-text">ResumeRank</span>
+    </div>
+    <p class="footer-tag">Beat the algorithm. Land the interview.</p>
+    <p class="footer-copy">AI-Powered by Groq LLaMA 3 · BCA Final Year Project · No data stored · Free forever</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
