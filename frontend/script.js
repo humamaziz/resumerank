@@ -3,11 +3,7 @@
    Universal taxonomy · Builder · PDF reports · Counter
 ═══════════════════════════════════════════════════ */
 
-const API_URL = window.location.origin + "/analyze";
-const response = await fetch(API_URL, {
-  method: "POST",
-  body: formData
-});
+const API_URL = window.location.origin;
 const $ = id => document.getElementById(id);
 
 // ── State ────────────────────────────────────────────
@@ -96,7 +92,7 @@ function initAOS() {
 // ═══════════════════════════════════════════════════
 async function loadTaxonomy() {
   try {
-    const res = await fetch(`${API_URL}/api/taxonomy`);
+    const res = await fetch(`${API_URL}/taxonomy`);
     taxonomy = await res.json();
   } catch {
     // Fallback: minimal taxonomy if server unreachable
@@ -237,7 +233,7 @@ async function startAnalysis() {
   fd.append("role", selectedRole);
 
   try {
-    const res = await fetch(`${API_URL}/api/analyze`, {method:"POST", body:fd});
+    const res = await fetch(`${API_URL}/analyze`, {method:"POST", body:fd});
     if (!res.ok) throw new Error((await res.json().catch(()=>({}))).error || `Error ${res.status}`);
     const data = await res.json();
     clearInterval(timer);
@@ -593,7 +589,7 @@ function resetAll() {
 // ═══════════════════════════════════════════════════
 async function fetchCounter() {
   try {
-    const res=await fetch(`${API_URL}/api/counter`);
+    const res=await fetch(`${API_URL}/counter`);
     const {count}=await res.json();
     updateCounterDisplay(count);
   } catch { $("counterNum").textContent="—"; }
@@ -649,7 +645,7 @@ $("payBtn").addEventListener("click", async () => {
 async function loadTemplates() {
   let templates=[];
   try {
-    const res=await fetch(`${API_URL}/api/builder/templates`);
+    const res=await fetch(`${API_URL}/builder/templates`);
     const data=await res.json();
     templates=data.templates||[];
   } catch {
