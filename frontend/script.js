@@ -4,6 +4,10 @@
 ═══════════════════════════════════════════════════ */
 
 const API_URL = window.location.origin + "/analyze";
+const response = await fetch(API_URL, {
+  method: "POST",
+  body: formData
+});
 const $ = id => document.getElementById(id);
 
 // ── State ────────────────────────────────────────────
@@ -92,7 +96,7 @@ function initAOS() {
 // ═══════════════════════════════════════════════════
 async function loadTaxonomy() {
   try {
-    const res = await fetch(`${API}/api/taxonomy`);
+    const res = await fetch(`${API_URL}/api/taxonomy`);
     taxonomy = await res.json();
   } catch {
     // Fallback: minimal taxonomy if server unreachable
@@ -233,7 +237,7 @@ async function startAnalysis() {
   fd.append("role", selectedRole);
 
   try {
-    const res = await fetch(`${API}/api/analyze`, {method:"POST", body:fd});
+    const res = await fetch(`${API_URL}/api/analyze`, {method:"POST", body:fd});
     if (!res.ok) throw new Error((await res.json().catch(()=>({}))).error || `Error ${res.status}`);
     const data = await res.json();
     clearInterval(timer);
@@ -589,7 +593,7 @@ function resetAll() {
 // ═══════════════════════════════════════════════════
 async function fetchCounter() {
   try {
-    const res=await fetch(`${API}/api/counter`);
+    const res=await fetch(`${API_URL}/api/counter`);
     const {count}=await res.json();
     updateCounterDisplay(count);
   } catch { $("counterNum").textContent="—"; }
@@ -645,7 +649,7 @@ $("payBtn").addEventListener("click", async () => {
 async function loadTemplates() {
   let templates=[];
   try {
-    const res=await fetch(`${API}/api/builder/templates`);
+    const res=await fetch(`${API_URL}/api/builder/templates`);
     const data=await res.json();
     templates=data.templates||[];
   } catch {
