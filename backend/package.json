@@ -1,7 +1,7 @@
 {
-  "name": "resumerank-backend",
-  "version": "1.0.0",
-  "description": "ATS Resume Analyzer – BCA Final Year Project",
+  "name": "resumerank-v5",
+  "version": "5.0.0",
+  "description": "ResumeRank — Universal AI-Powered ATS Analyzer",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -17,13 +17,7 @@
   "devDependencies": {
     "nodemon": "^3.0.1"
   },
-  "keywords": [
-    "resume",
-    "ats",
-    "analyzer",
-    "nodejs",
-    "express"
-  ],
+  "keywords": ["resume", "ats", "analyzer", "ai", "nodejs", "universal"],
   "author": "BCA Student",
   "license": "MIT"
 }
