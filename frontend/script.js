@@ -3,7 +3,7 @@
    Universal taxonomy · Builder · PDF reports · Counter
 ═══════════════════════════════════════════════════ */
 
-const API = "http://localhost:5000";
+const API = "https://resumerank-w8h2.onrender.com/analyze";
 const $ = id => document.getElementById(id);
 
 // ── State ────────────────────────────────────────────

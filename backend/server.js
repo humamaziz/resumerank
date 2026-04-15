@@ -667,6 +667,6 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`\n🚀 ResumeRank v5 → https://resumerank-w8h2.onrender.com/analyze`);
+  console.log(`\n🚀 ResumeRank v5 → http://localhost:${PORT}`);
   console.log(GROQ_API_KEY ? `✅ AI enabled (${GROQ_MODEL})` : `⚠️  No GROQ_API_KEY — smart static mode`);
 });
