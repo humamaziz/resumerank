@@ -598,7 +598,7 @@ app.get("/api/builder/templates", (req, res) => {
 });
 
 // Main analyze endpoint
-app.post("/api/analyze", upload.single("resume"), async (req, res) => {
+app.post("/analyze", upload.single("resume"), async (req, res) => {
   if (!req.file) return res.status(400).json({ error: "No PDF uploaded." });
   const filePath = req.file.path;
   const role = req.body.role || "software_dev";
@@ -666,7 +666,7 @@ app.use((err, req, res, next) => {
   res.status(400).json({ error: err.message || "Request error" });
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`\n🚀 ResumeRank v5 → http://localhost:${PORT}`);
   console.log(GROQ_API_KEY ? `✅ AI enabled (${GROQ_MODEL})` : `⚠️  No GROQ_API_KEY — smart static mode`);
 });
