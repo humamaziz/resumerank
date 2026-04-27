@@ -1,10 +1,4 @@
 require("dotenv").config();
-/* ═══════════════════════════════════════════════════════
-   ResumeRank v5 — server.js
-   Universal job support · Real counter · Clean AI output
-   Run: node server.js
-   Env: GROQ_API_KEY=your_key  (free at console.groq.com)
-═══════════════════════════════════════════════════════ */
 
 const express  = require("express");
 const multer   = require("multer");
@@ -20,12 +14,10 @@ const GROQ_API_KEY = process.env.GROQ_API_KEY || "";
 const GROQ_MODEL   = "llama-3.3-70b-versatile";
 const COUNTER_FILE = path.join(__dirname, "counter.json");
 
-// ── Serve frontend ───────────────────────────────────────────────
 app.use(express.static(path.join(__dirname, "../frontend")));
 app.use(cors());
 app.use(express.json());
 
-// ── Multer ───────────────────────────────────────────────────────
 const uploadDir = path.join(__dirname, "uploads");
 if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
 
@@ -39,7 +31,6 @@ const upload = multer({
   limits: { fileSize: 5 * 1024 * 1024 },
 });
 
-// ── Analysis Counter ─────────────────────────────────────────────
 function readCounter() {
   try { return JSON.parse(fs.readFileSync(COUNTER_FILE, "utf8")).count || 0; } catch { return 0; }
 }
@@ -48,10 +39,6 @@ function incrementCounter() {
   fs.writeFileSync(COUNTER_FILE, JSON.stringify({ count }));
   return count;
 }
-
-// ═══════════════════════════════════════════════════════
-//  UNIVERSAL ROLE TAXONOMY
-// ═══════════════════════════════════════════════════════
 
 const CATEGORIES = {
   technology: {
@@ -168,12 +155,7 @@ const CATEGORIES = {
   },
 };
 
-// ═══════════════════════════════════════════════════════
-//  KEYWORD SETS — per role (deduplicated arrays)
-// ═══════════════════════════════════════════════════════
-
 const ROLE_KEYWORDS = {
-  // Technology
   software_dev:    ["javascript","python","java","c++","git","sql","rest api","oop","docker","algorithms","data structures","agile","unit testing","linux","design patterns"],
   frontend:        ["html","css","javascript","react","typescript","webpack","tailwind","responsive design","figma","accessibility","performance","git","vue","angular","web vitals"],
   backend:         ["node.js","python","java","spring","sql","mongodb","postgresql","redis","docker","rest api","graphql","microservices","authentication","caching","message queues"],
@@ -184,70 +166,52 @@ const ROLE_KEYWORDS = {
   qa_engineer:     ["selenium","test automation","jira","api testing","postman","pytest","junit","test planning","regression testing","bug reporting","agile","performance testing","cypress","sql","ci/cd"],
   cybersecurity:   ["penetration testing","network security","firewalls","siem","vulnerability assessment","owasp","ethical hacking","iam","encryption","incident response","linux","python","nessus","compliance","threat analysis"],
   ai_ml:           ["machine learning","deep learning","python","tensorflow","pytorch","nlp","computer vision","model deployment","transformers","reinforcement learning","data pipeline","mlops","hugging face","llm","fine-tuning"],
-
-  // Management
   hr_manager:      ["recruitment","talent acquisition","employee relations","performance management","hris","onboarding","compensation","benefits","hr policies","compliance","training","payroll","succession planning","labor law","organizational development"],
   operations_mgr:  ["process improvement","supply chain","budgeting","kpi","lean","six sigma","vendor management","logistics","cross-functional","project management","erp","strategic planning","cost reduction","team leadership","operations"],
   business_analyst:["requirements gathering","sql","jira","tableau","process modeling","stakeholder management","bpmn","uml","agile","data analysis","excel","business intelligence","gap analysis","user stories","reporting"],
   project_manager: ["pmp","agile","scrum","risk management","jira","stakeholder communication","budget management","milestone tracking","resource allocation","gantt","change management","prince2","kanban","deliverables","team leadership"],
   product_manager: ["product roadmap","user stories","agile","scrum","a/b testing","product strategy","market research","kpi","mvp","prioritization","sprint planning","go-to-market","user research","competitive analysis","analytics"],
   supply_chain:    ["logistics","procurement","inventory management","erp","vendor management","forecasting","lean","six sigma","supply chain optimization","demand planning","warehouse","supplier negotiation","kpi","cost reduction","sap"],
-
-  // Marketing
   digital_marketing:["seo","google analytics","content marketing","social media","ppc","crm","email marketing","hubspot","google ads","conversion optimization","kpi","branding","copywriting","meta ads","marketing automation"],
   seo_specialist:   ["on-page seo","off-page seo","keyword research","google search console","backlinks","technical seo","content strategy","google analytics","semrush","ahrefs","site audit","schema markup","core web vitals","local seo","serp"],
   content_writer:   ["copywriting","seo writing","content strategy","editorial","blogging","social media content","proofreading","content management","wordpress","keyword research","brand voice","storytelling","email newsletters","long-form content","research"],
   brand_manager:    ["brand strategy","market research","brand identity","campaign management","consumer insights","competitive analysis","positioning","brand equity","integrated marketing","budget management","creative direction","kpi","brand guidelines","social media","pr"],
   sales_executive:  ["b2b sales","crm","lead generation","salesforce","pipeline management","negotiation","cold calling","relationship management","quota attainment","account management","upselling","customer retention","sales strategy","presentation skills","revenue growth"],
   social_media_mgr: ["instagram","facebook","twitter","linkedin","content calendar","analytics","engagement","paid social","influencer marketing","tiktok","community management","brand voice","hootsuite","social listening","campaign management"],
-
-  // Finance
   accountant:          ["tally","gst","tds","financial statements","accounts payable","accounts receivable","tax compliance","audit","excel","budgeting","bank reconciliation","payroll","journal entries","financial reporting","erp"],
   financial_analyst:   ["financial modeling","excel","python","bloomberg","valuation","dcf","forecasting","budget analysis","variance analysis","sql","power bi","investment analysis","risk assessment","financial reporting","tableau"],
   investment_analyst:  ["equity research","dcf","financial modeling","bloomberg","portfolio management","valuation","fixed income","derivatives","risk analysis","excel","cfa","market analysis","investment thesis","due diligence","sector research"],
   auditor:             ["audit planning","internal controls","sox compliance","financial statements","risk assessment","gaap","ifrs","excel","analytical review","audit sampling","fraud detection","regulatory compliance","working papers","documentation","reporting"],
   tax_consultant:      ["income tax","gst","tax planning","tds","tax compliance","direct tax","indirect tax","income tax act","tax returns","transfer pricing","tax advisory","corporate tax","excel","financial analysis","regulatory compliance"],
   ca:                  ["ifrs","gaap","financial reporting","audit","taxation","gst","excel","erp","financial analysis","corporate law","investment advisory","risk management","compliance","due diligence","tally"],
-
-  // Teaching
   school_teacher:  ["lesson planning","curriculum design","classroom management","differentiated instruction","assessment","student engagement","ncert","cbse","pedagogy","educational technology","parent communication","mentoring","subject expertise","learning outcomes","google classroom"],
   professor:       ["research","publications","curriculum development","academic writing","grant writing","thesis supervision","lecture delivery","course design","academic advising","interdisciplinary","peer review","conference presentations","lab management","scholarly research","mentoring"],
   lecturer:        ["lecture delivery","course design","student assessment","academic research","curriculum","higher education","subject matter expertise","lesson planning","e-learning","student mentoring","examination","academic writing","teaching methodology","lms","feedback"],
   tutor:           ["subject expertise","lesson planning","individualized instruction","student assessment","patience","communication","academic support","progress tracking","problem-solving","curriculum alignment","online tutoring","adaptability","exam preparation","goal setting","feedback"],
   trainer:         ["training delivery","instructional design","adult learning","lms","facilitation","needs assessment","content development","e-learning","performance improvement","measurement","stakeholder management","curriculum design","coaching","feedback","virtual training"],
   curriculum_dev:  ["curriculum design","instructional design","bloom's taxonomy","learning objectives","content development","assessment design","standards alignment","lms","educational technology","addie model","subject expertise","e-learning","stakeholder collaboration","evaluation","revision"],
-
-  // Healthcare
   doctor:          ["clinical diagnosis","patient care","medical history","treatment planning","icd-10","emr","evidence-based medicine","pharmacology","differential diagnosis","patient communication","medical ethics","surgery","clinical research","public health","telemedicine"],
   nurse:           ["patient assessment","medication administration","iv therapy","wound care","vital signs","emr","patient education","infection control","emergency care","care planning","documentation","teamwork","critical thinking","compassion","triage"],
   pharmacist:      ["dispensing","drug interactions","clinical pharmacy","patient counseling","formulary management","pharmaceutical calculations","regulatory compliance","inventory management","clinical trials","pharmacovigilance","hospital pharmacy","retail pharmacy","patient safety","drug therapy management","documentation"],
   lab_technician:  ["sample collection","laboratory techniques","pcr","microscopy","quality control","equipment calibration","lab safety","data recording","nabl","specimen processing","biochemistry","hematology","microbiology","report generation","sop compliance"],
   physiotherapist: ["patient assessment","exercise therapy","manual therapy","rehabilitation","musculoskeletal","neurological physiotherapy","sports injury","patient education","goal setting","pain management","electrotherapy","posture correction","functional assessment","documentation","team collaboration"],
   health_admin:    ["healthcare management","billing","coding","compliance","hipaa","emr","operations management","staff management","patient satisfaction","budgeting","quality improvement","regulatory compliance","scheduling","vendor management","strategic planning"],
-
-  // Law
   lawyer:            ["litigation","legal research","contract drafting","client representation","court appearances","legal writing","negotiation","case management","due diligence","legal compliance","ipc","crpc","civil procedure","criminal law","bar council"],
   legal_analyst:     ["legal research","contract analysis","regulatory compliance","due diligence","legal documentation","case analysis","risk assessment","drafting","litigation support","corporate law","intellectual property","legal writing","research tools","statutory interpretation","compliance"],
   paralegal:         ["legal research","case management","document preparation","filing","client communication","discovery","trial preparation","legal databases","contract review","scheduling","billing","legal correspondence","court procedures","document organization","confidentiality"],
   compliance_officer:["regulatory compliance","risk management","policy development","audit","sox","aml","kyc","training","legal knowledge","reporting","governance","data privacy","gdpr","internal controls","monitoring"],
   corporate_counsel: ["contract negotiation","mergers acquisitions","corporate governance","intellectual property","regulatory compliance","legal strategy","risk management","litigation management","employment law","securities law","due diligence","board reporting","legal documentation","negotiations","dispute resolution"],
-
-  // Design
   ui_ux:           ["figma","sketch","wireframing","user research","prototyping","adobe xd","usability testing","information architecture","design systems","css","accessibility","user flows","a/b testing","typography","interaction design"],
   graphic_designer:["adobe photoshop","adobe illustrator","indesign","typography","branding","layout design","print design","color theory","logo design","packaging","digital design","creative direction","vector graphics","photo editing","brand identity"],
   motion_designer: ["after effects","cinema 4d","blender","motion graphics","animation","video editing","premiere pro","storyboarding","visual effects","3d animation","ui animation","explainer videos","brand animation","compositing","creative direction"],
   product_designer:["figma","user research","prototyping","design systems","usability testing","information architecture","visual design","interaction design","accessibility","design thinking","cross-functional collaboration","product strategy","wireframing","user flows","analytics"],
   interior_designer:["space planning","autocad","sketchup","3d rendering","material selection","client consultation","project management","building codes","furniture specification","color theory","lighting design","revit","mood boards","concept development","construction documents"],
   fashion_designer: ["garment construction","pattern making","draping","fashion illustration","textiles","trend forecasting","cad","collection development","production management","fashion marketing","sustainability","sourcing","fit sessions","portfolio","brand development"],
-
-  // Research
   research_scientist:["scientific research","data analysis","statistical methods","publications","grant writing","laboratory techniques","r","python","experimental design","peer review","scientific writing","hypothesis testing","research methodology","conference presentations","interdisciplinary"],
   phd_candidate:     ["research methodology","academic writing","literature review","data analysis","thesis","conference presentations","statistical analysis","grant applications","r","python","peer review","experimental design","interdisciplinary research","teaching assistant","academic publishing"],
   data_analyst:      ["sql","python","excel","tableau","power bi","data cleaning","statistical analysis","reporting","data visualization","business intelligence","r","etl","dashboard creation","stakeholder communication","analytical thinking"],
   policy_analyst:    ["policy research","qualitative analysis","quantitative analysis","stakeholder engagement","report writing","regulatory analysis","legislative analysis","data analysis","program evaluation","government relations","policy development","economic analysis","excel","spss","advocacy"],
   lab_researcher:    ["experimental design","laboratory techniques","data collection","statistical analysis","scientific writing","literature review","microscopy","pcr","spectroscopy","quality control","equipment calibration","research protocols","data interpretation","teamwork","documentation"],
-
-  // Others
   civil_engineer:      ["autocad","structural design","project management","site supervision","concrete design","revit","construction management","tender documentation","quantity surveying","building codes","estimation","civil drawing","staad pro","soil mechanics","highway design"],
   mechanical_engineer: ["autocad","solidworks","catia","finite element analysis","thermodynamics","fluid mechanics","manufacturing processes","project management","quality control","maintenance","cad/cam","product design","material science","lean manufacturing","simulation"],
   journalist:          ["reporting","news writing","editing","investigative journalism","interviewing","press freedom","digital journalism","social media","multimedia","fact-checking","storytelling","deadline management","source development","cms","broadcast journalism"],
@@ -255,10 +219,6 @@ const ROLE_KEYWORDS = {
   logistics:           ["supply chain","transportation management","warehouse operations","inventory management","erp","fleet management","import export","customs clearance","vendor coordination","route optimization","sap","excel","freight management","documentation","cost reduction"],
   customer_support:    ["crm","customer service","issue resolution","zendesk","communication","empathy","product knowledge","escalation handling","sla","ticketing systems","data entry","active listening","team collaboration","feedback handling","kpi"],
 };
-
-// ═══════════════════════════════════════════════════════
-//  DEEP ANALYSIS ENGINE
-// ═══════════════════════════════════════════════════════
 
 function deepAnalyze(text, role) {
   const lower = text.toLowerCase();
@@ -268,7 +228,6 @@ function deepAnalyze(text, role) {
 
   const roleKeywords = ROLE_KEYWORDS[role] || ROLE_KEYWORDS["software_dev"];
 
-  // Section detection
   const sectionMap = {
     contact:        ["email","phone","mobile","linkedin","github","portfolio","address"],
     summary:        ["summary","objective","profile","about me","overview","professional summary","career objective"],
@@ -289,12 +248,10 @@ function deepAnalyze(text, role) {
   const missingSections = ["summary","education","skills","experience","projects","contact"]
     .filter(s => !detected[s]);
 
-  // Keywords (deduplicated)
   const foundKeywords   = [...new Set(roleKeywords.filter(kw => lower.includes(kw)))];
   const missingKeywords = [...new Set(roleKeywords.filter(kw => !lower.includes(kw)))];
   const kwMatchPct      = Math.round((foundKeywords.length / roleKeywords.length) * 100);
 
-  // Broad skills extraction (used for Resume Builder)
   const allTerms = [
     "javascript","python","java","c++","c#","typescript","go","rust","kotlin","swift","php","ruby",
     "react","vue","angular","svelte","next.js","flutter","react native",
@@ -313,36 +270,30 @@ function deepAnalyze(text, role) {
   ];
   const extractedSkills = [...new Set(allTerms.filter(t => lower.includes(t)))];
 
-  // Contact
   const hasEmail    = /[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}/i.test(text);
   const hasPhone    = /(\+?\d[\d\s\-()]{7,}\d)/.test(text);
   const hasLinkedIn = /linkedin\.com\/in\//i.test(text) || lower.includes("linkedin");
   const hasGitHub   = /github\.com\//i.test(text) || lower.includes("github");
 
-  // Action verbs
   const verbs = ["developed","designed","implemented","built","created","managed","led","achieved","improved",
     "collaborated","deployed","analyzed","delivered","optimized","automated","architected","engineered",
     "reduced","increased","launched","maintained","integrated","migrated","refactored","mentored",
     "streamlined","established","coordinated","initiated","facilitated","conducted","administered"];
   const foundVerbs = [...new Set(verbs.filter(v => lower.includes(v)))];
 
-  // Quantification
   const quantRx = /\d+[\+%]?\s*(users?|clients?|students?|patients?|cases?|projects?|team|engineers?|employees?|%|million|thousand|k\b|years?|months?|days?|hours?)/gi;
   const quantMatches = [...new Set(text.match(quantRx) || [])];
   const hasQuant = quantMatches.length > 0;
 
-  // Formatting
   const hasBullets  = /[•·▪▸\-\*]\s+\w/.test(text);
   const avgLinelen  = lines.reduce((s,l) => s + l.length, 0) / (lines.length || 1);
   const formattingGood = hasBullets && avgLinelen < 120;
 
-  // Readability
   const sentences   = text.split(/[.!?]+/).filter(s => s.trim().length > 5);
   const syllables   = words.reduce((t,w) => t + Math.max(1, w.replace(/[^aeiou]/gi,"").length), 0);
   const flesch      = Math.round(206.835 - 1.015*(words.length/(sentences.length||1)) - 84.6*(syllables/(words.length||1)));
   const readability = Math.min(100, Math.max(0, flesch));
 
-  // ATS Score
   let ats = 0;
   ats += Math.round(kwMatchPct * 0.35);
   const criticals   = ["education","skills","experience","contact"];
@@ -363,7 +314,6 @@ function deepAnalyze(text, role) {
 
   const jobMatch = Math.round(kwMatchPct * 0.6 + (critFound / criticals.length) * 100 * 0.4);
 
-  // Strengths (unique, no duplication)
   const strengths = [];
   const strengthsSeen = new Set();
   const addS = (s) => { if (!strengthsSeen.has(s)) { strengthsSeen.add(s); strengths.push(s); } };
@@ -387,7 +337,6 @@ function deepAnalyze(text, role) {
     addS("Certifications/awards section boosts credibility with ATS and recruiters");
   if (strengths.length === 0) addS("Resume successfully parsed and analyzed");
 
-  // Weaknesses (unique)
   const weaknesses = [];
   const weakSeen = new Set();
   const addW = (w) => { if (!weakSeen.has(w)) { weakSeen.add(w); weaknesses.push(w); } };
@@ -410,7 +359,6 @@ function deepAnalyze(text, role) {
   if (weaknesses.length === 0)
     addW("No major structural issues detected");
 
-  // ATS Tips (role-aware, no duplication)
   const atsTips = [
     "Use exact section headers: 'Work Experience', 'Education', 'Skills' — avoid creative names",
     "Mirror the job description's exact phrases — ATS matches keywords verbatim",
@@ -424,7 +372,6 @@ function deepAnalyze(text, role) {
     "Ensure LinkedIn profile experience dates exactly match your resume",
   ];
 
-  // LinkedIn Tips
   const roleLabel = getRoleLabel(role);
   const linkedInTips = [
     `Set your LinkedIn headline to '${roleLabel}' — recruiters filter by exact title`,
@@ -451,10 +398,6 @@ function deepAnalyze(text, role) {
     role: roleLabel,
   };
 }
-
-// ═══════════════════════════════════════════════════════
-//  AI VIA GROQ
-// ═══════════════════════════════════════════════════════
 
 function callGroq(prompt) {
   return new Promise((resolve, reject) => {
@@ -523,8 +466,6 @@ function parseAI(text) {
   return null;
 }
 
-// ── Static fallbacks ─────────────────────────────────────────────
-
 function staticSuggestions(a, role) {
   const sug = new Set();
   if (a.missingKeywords.length > 0)
@@ -557,7 +498,6 @@ function staticRecruiterView(a) {
 
 function getVerdict(s) { return s >= 80 ? "Excellent" : s >= 65 ? "Good" : s >= 45 ? "Average" : "Weak"; }
 
-// ── Role label helpers ───────────────────────────────────────────
 function getRoleLabel(role) {
   for (const cat of Object.values(CATEGORIES)) {
     if (cat.roles[role]) return cat.roles[role];
@@ -565,14 +505,8 @@ function getRoleLabel(role) {
   return role.replace(/_/g," ").replace(/\b\w/g,c=>c.toUpperCase());
 }
 
-// ═══════════════════════════════════════════════════════
-//  ROUTES
-// ═══════════════════════════════════════════════════════
-
-// Health check
 app.get("/api/health", (req, res) => res.json({ status: "ok", version: "5.0" }));
 
-// Taxonomy (categories + roles for frontend selectors)
 app.get("/api/taxonomy", (req, res) => {
   const out = {};
   for (const [catKey, cat] of Object.entries(CATEGORIES)) {
@@ -581,10 +515,8 @@ app.get("/api/taxonomy", (req, res) => {
   res.json(out);
 });
 
-// Analysis counter
 app.get("/api/counter", (req, res) => res.json({ count: readCounter() }));
 
-// Resume Builder data endpoint
 app.get("/api/builder/templates", (req, res) => {
   res.json({
     templates: [
@@ -597,7 +529,6 @@ app.get("/api/builder/templates", (req, res) => {
   });
 });
 
-// Main analyze endpoint
 app.post("/analyze", upload.single("resume"), async (req, res) => {
   if (!req.file) return res.status(400).json({ error: "No PDF uploaded." });
   const filePath = req.file.path;
@@ -661,7 +592,6 @@ app.post("/analyze", upload.single("resume"), async (req, res) => {
   }
 });
 
-// Error handler
 app.use((err, req, res, next) => {
   res.status(400).json({ error: err.message || "Request error" });
 });

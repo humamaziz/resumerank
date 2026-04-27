@@ -10,7 +10,6 @@
 </head>
 <body>
 
-<!-- NAVBAR -->
 <nav class="nav" id="nav">
   <div class="nav-wrap">
     <a href="#" class="nav-brand">
@@ -44,7 +43,6 @@
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-glow g1"></div>
   <div class="hero-glow g2"></div>
@@ -67,7 +65,6 @@
   </div>
 </section>
 
-<!-- RECENT ANALYSIS BANNER -->
 <div class="recent-bar" id="recentBar" style="display:none">
   <span>📋 Previous analysis found:</span>
   <strong id="recentLabel">—</strong>
@@ -75,39 +72,32 @@
   <button class="rb-x" id="rbX">✕</button>
 </div>
 
-<!-- ═══ ANALYZER SECTION ═══ -->
 <section class="main-section" id="analyzer-section">
   <div class="wrap">
     <div class="section-label">Free AI Tool</div>
     <h2 class="section-title">Analyze Your Resume</h2>
     <p class="section-sub">No signup · No email · No credit card · Results in seconds</p>
 
-    <!-- UPLOAD CARD -->
     <div class="upload-card" id="uploadCard" data-aos="up">
 
-      <!-- Step 1: Category -->
       <div class="step-row">
         <div class="step-num">1</div>
         <div class="step-body">
           <label class="step-label">Job Category</label>
           <div class="cat-grid" id="catGrid">
-            <!-- populated by JS -->
           </div>
         </div>
       </div>
 
-      <!-- Step 2: Role -->
       <div class="step-row" id="roleRow" style="display:none">
         <div class="step-num">2</div>
         <div class="step-body">
           <label class="step-label">Specific Role</label>
           <div class="role-chips" id="roleChips">
-            <!-- populated by JS -->
           </div>
         </div>
       </div>
 
-      <!-- Step 3: Upload -->
       <div class="step-row" id="uploadRow" style="display:none">
         <div class="step-num">3</div>
         <div class="step-body">
@@ -131,9 +121,8 @@
         Analyze Resume with AI
       </button>
 
-    </div><!-- /upload-card -->
+    </div>
 
-    <!-- LOADING -->
     <div class="loading-card" id="loadingCard" style="display:none">
       <div class="ld-ring-wrap">
         <svg viewBox="0 0 72 72" width="72" height="72">
@@ -154,14 +143,12 @@
       <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
     </div>
 
-    <!-- ERROR -->
     <div class="error-card" id="errorCard" style="display:none">
       <div class="err-ico">⚠</div>
       <p class="err-msg" id="errMsg">Could not reach server.</p>
       <button class="btn-outline" id="errRetry" type="button">Try Again</button>
     </div>
 
-    <!-- ═══ RESULTS SHELL ═══ -->
     <div class="results-shell" id="resultsShell" style="display:none">
 
       <div class="results-hdr">
@@ -172,7 +159,6 @@
         </div>
       </div>
 
-      <!-- Tabs -->
       <div class="tabs" id="tabsEl" role="tablist">
         <button class="tab active" data-tab="0" role="tab">Score</button>
         <button class="tab" data-tab="1" role="tab">Keywords</button>
@@ -184,10 +170,8 @@
       <div class="panels-vp" id="panelsVp">
         <div class="panels-track" id="panelsTrack">
 
-          <!-- TAB 0: SCORE DASHBOARD -->
           <div class="panel" id="panel0">
             <div class="score-layout">
-              <!-- Ring -->
               <div class="ring-card">
                 <div class="ring-wrap">
                   <svg viewBox="0 0 140 140" width="160" height="160">
@@ -203,7 +187,6 @@
                 <p class="ring-verdict" id="ringVerdict"></p>
               </div>
 
-              <!-- Metric bars -->
               <div class="metric-grid">
                 <div class="mbar"><div class="mb-row"><span class="mb-l">ATS Score</span><span class="mb-v" id="mbAts">0</span></div><div class="mb-track"><div class="mb-fill accent1" id="mbAtsF"></div></div></div>
                 <div class="mbar"><div class="mb-row"><span class="mb-l">Job Match</span><span class="mb-v" id="mbMatch">0</span></div><div class="mb-track"><div class="mb-fill accent2" id="mbMatchF"></div></div></div>
@@ -212,7 +195,6 @@
               </div>
             </div>
 
-            <!-- Stat row -->
             <div class="stat-row">
               <div class="stat-box"><span id="stWc">—</span><em>Words</em></div>
               <div class="stat-box"><span id="stAv">—</span><em>Action Verbs</em></div>
@@ -220,7 +202,6 @@
               <div class="stat-box"><span id="stSk">—</span><em>Skills Found</em></div>
             </div>
 
-            <!-- Info rows -->
             <div class="info-panels">
               <div class="info-panel">
                 <div class="ip-title">Contact</div>
@@ -236,21 +217,18 @@
               </div>
             </div>
 
-            <!-- AI summary -->
             <div class="ai-card">
               <div class="ac-hd">AI Assessment</div>
               <p id="summaryText">—</p>
               <div class="verdict-tag" id="verdictTag"></div>
             </div>
 
-            <!-- Recruiter view -->
             <div class="recruiter-card">
               <div class="rc-hd">👀 Recruiter View — First 10 Seconds</div>
               <p id="recruiterText">—</p>
             </div>
           </div>
 
-          <!-- TAB 1: KEYWORDS -->
           <div class="panel" id="panel1">
             <div class="panel-title-row">
               <h3>Skills & Keyword Match</h3>
@@ -280,7 +258,6 @@
             </div>
           </div>
 
-          <!-- TAB 2: STRENGTHS & WEAKNESSES -->
           <div class="panel" id="panel2">
             <div class="panel-title-row"><h3>Strengths & Weaknesses</h3></div>
             <div class="sw-cols">
@@ -304,7 +281,6 @@
             </div>
           </div>
 
-          <!-- TAB 3: AI FEEDBACK -->
           <div class="panel" id="panel3">
             <div class="panel-title-row">
               <h3>AI Suggestions</h3>
@@ -321,7 +297,6 @@
             </div>
           </div>
 
-          <!-- TAB 4: EXPERT TIPS -->
           <div class="panel" id="panel4">
             <div class="panel-title-row"><h3>Expert ATS Tips</h3><span class="role-pill" id="rolePill"></span></div>
             <div class="tips-grid" id="tipsGrid"></div>
@@ -331,29 +306,26 @@
             </div>
           </div>
 
-        </div><!-- /panels-track -->
-      </div><!-- /panels-vp -->
+        </div>
+      </div>
 
-      <!-- Slide nav -->
       <div class="slide-nav">
         <button class="sn-btn" id="slidePrev" disabled>←</button>
         <div class="sn-dots" id="snDots"></div>
         <button class="sn-btn" id="slideNext">→</button>
       </div>
 
-    </div><!-- /results-shell -->
+    </div>
 
   </div>
 </section>
 
-<!-- ═══ RESUME BUILDER SECTION ═══ -->
 <section class="main-section" id="builder-section" style="padding-top:60px">
   <div class="wrap">
     <div class="section-label">Premium Feature</div>
     <h2 class="section-title">Resume Builder</h2>
     <p class="section-sub">Generate a beautiful ATS-optimized resume from your analysis</p>
 
-    <!-- Locked state -->
     <div class="builder-locked" id="builderLocked" data-aos="up">
       <div class="lock-icon">🔒</div>
       <h3>Unlock Resume Builder</h3>
@@ -373,7 +345,6 @@
       <p class="demo-note">Demo mode: click to simulate payment success</p>
     </div>
 
-    <!-- Payment simulation overlay -->
     <div class="payment-overlay" id="paymentOverlay" style="display:none">
       <div class="payment-modal">
         <div class="pm-header">
@@ -395,7 +366,6 @@
       </div>
     </div>
 
-    <!-- Builder unlocked UI -->
     <div class="builder-ui" id="builderUi" style="display:none" data-aos="up">
       <!-- Template selector -->
       <div class="builder-step">
@@ -403,12 +373,11 @@
         <div class="bs-body">
           <label class="bs-label">Choose Template</label>
           <div class="template-grid" id="templateGrid">
-            <!-- populated by JS -->
+
           </div>
         </div>
       </div>
 
-      <!-- AI skill option -->
       <div class="builder-step">
         <div class="bs-num">2</div>
         <div class="bs-body">
@@ -432,7 +401,6 @@
         </div>
       </div>
 
-      <!-- Name input for filename -->
       <div class="builder-step">
         <div class="bs-num">3</div>
         <div class="bs-body">
@@ -443,22 +411,19 @@
 
       <button class="btn-primary" id="generateResumeBtn" type="button">Generate Resume Preview →</button>
 
-      <!-- Resume Preview -->
       <div class="resume-preview-wrap" id="resumePreviewWrap" style="display:none">
         <div class="rp-header">
           <h4>Resume Preview</h4>
           <button class="btn-primary" id="downloadResumeBtn" type="button">⬇ Download as PDF</button>
         </div>
         <div class="resume-preview" id="resumePreview">
-          <!-- Generated by JS -->
         </div>
       </div>
 
-    </div><!-- /builder-ui -->
+    </div>
   </div>
 </section>
 
-<!-- ═══ ATS TIPS SLIDER ═══ -->
 <section class="tips-outer" id="tips-section">
   <div class="wrap">
     <div class="section-label">Expert Knowledge</div>
@@ -484,7 +449,6 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer class="footer">
   <div class="wrap">
     <div class="f-brand">ResumeRank<sup>AI</sup></div>

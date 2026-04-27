@@ -1,12 +1,6 @@
-/* ═══════════════════════════════════════════════════
-   ResumeRank v5 — script.js
-   Universal taxonomy · Builder · PDF reports · Counter
-═══════════════════════════════════════════════════ */
-
 const API_URL = window.location.origin;
 const $ = id => document.getElementById(id);
 
-// ── State ────────────────────────────────────────────
 let selectedCat  = "";
 let selectedRole = "";
 let selectedFile = null;
@@ -15,17 +9,14 @@ let currentTab   = 0;
 const TABS       = 5;
 let taxonomy     = {};
 
-// Tips slider
 let tipIdx = 0;
 const TIPS = 7;
 let tipTimer = null;
 
-// Builder
 let builderUnlocked = false;
 let selectedTemplate = "minimal";
 let includeAiSkills  = true;
 
-// ── Init ─────────────────────────────────────────────
 (async function init() {
   applyTheme(localStorage.getItem("rr-theme") || "dark");
   initNav();
@@ -37,9 +28,6 @@ let includeAiSkills  = true;
   await fetchCounter();
 })();
 
-// ═══════════════════════════════════════════════════
-//  THEME
-// ═══════════════════════════════════════════════════
 function applyTheme(t) {
   document.documentElement.setAttribute("data-theme", t);
   localStorage.setItem("rr-theme", t);
@@ -48,9 +36,6 @@ $("themeBtn").addEventListener("click", () =>
   applyTheme(document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark")
 );
 
-// ═══════════════════════════════════════════════════
-//  NAV
-// ═══════════════════════════════════════════════════
 function initNav() {
   const nav  = $("nav");
   const ham  = $("hamburger");
@@ -63,9 +48,6 @@ function initNav() {
   );
 }
 
-// ═══════════════════════════════════════════════════
-//  SMOOTH SCROLL
-// ═══════════════════════════════════════════════════
 function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener("click", e => {
@@ -75,9 +57,6 @@ function initSmoothScroll() {
   });
 }
 
-// ═══════════════════════════════════════════════════
-//  SCROLL REVEAL (AOS)
-// ═══════════════════════════════════════════════════
 function initAOS() {
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -87,15 +66,11 @@ function initAOS() {
   document.querySelectorAll("[data-aos]").forEach(el => io.observe(el));
 }
 
-// ═══════════════════════════════════════════════════
-//  LOAD TAXONOMY FROM BACKEND
-// ═══════════════════════════════════════════════════
 async function loadTaxonomy() {
   try {
     const res = await fetch(`${API_URL}/taxonomy`);
     taxonomy = await res.json();
   } catch {
-    // Fallback: minimal taxonomy if server unreachable
     taxonomy = {
       technology:{label:"Technology",roles:{software_dev:"Software Developer",frontend:"Frontend Developer",backend:"Backend Developer",fullstack:"Full Stack Developer",data_science:"Data Scientist",devops:"DevOps Engineer"}},
       management:{label:"Management",roles:{hr_manager:"HR Manager",project_manager:"Project Manager",product_manager:"Product Manager",business_analyst:"Business Analyst"}},
@@ -129,10 +104,8 @@ function renderCategories() {
 function selectCategory(catKey, btn) {
   selectedCat  = catKey;
   selectedRole = "";
-  // Highlight selected category
   document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active"));
   btn.classList.add("active");
-  // Show role row
   renderRoles(catKey);
   $("roleRow").style.display = "flex";
   $("uploadRow").style.display = "none";
@@ -159,13 +132,9 @@ function selectRole(roleKey, chip) {
   document.querySelectorAll(".role-chip").forEach(c => c.classList.remove("active"));
   chip.classList.add("active");
   $("uploadRow").style.display = "flex";
-  // Re-evaluate analyze button
   if (selectedFile) $("analyzeBtn").disabled = false;
 }
 
-// ═══════════════════════════════════════════════════
-//  FILE UPLOAD
-// ═══════════════════════════════════════════════════
 const browseBtn = $("browseBtn");
 const dropZone  = $("dropZone");
 const fileInput = $("fileInput");
@@ -199,9 +168,6 @@ $("fbRm").addEventListener("click", () => {
   $("analyzeBtn").disabled = true;
 });
 
-// ═══════════════════════════════════════════════════
-//  ANALYZE
-// ═══════════════════════════════════════════════════
 $("analyzeBtn").addEventListener("click", () => {
   if (!selectedRole) { toast("Please select a job category and role first.", "err"); return; }
   if (!selectedFile) { toast("Please upload a PDF resume.", "err"); return; }
@@ -269,9 +235,6 @@ function animProg(target, pctEl, fillEl) {
   }, 16);
 }
 
-// ═══════════════════════════════════════════════════
-//  SHOW RESULTS
-// ═══════════════════════════════════════════════════
 function showResults(d) {
   hide("loadingCard");
   show("resultsShell");
@@ -290,7 +253,6 @@ function showResults(d) {
   setTimeout(initAOS, 80);
 }
 
-// ── PANEL 0 ──────────────────────────────────────────
 function buildPanel0(d) {
   const arc   = $("scoreArc");
   const circ  = 346;
@@ -311,17 +273,14 @@ function buildPanel0(d) {
   setPct("mbKwF",    d.keywordMatchPct||0);
   setBar("mbRead",  d.readabilityScore||60, 100,"mbReadF");
 
-  // Contact chips
   const cc = $("contactChips"); cc.innerHTML="";
   [{l:"Email",v:d.contact?.hasEmail},{l:"Phone",v:d.contact?.hasPhone},{l:"LinkedIn",v:d.contact?.hasLinkedIn},{l:"GitHub",v:d.contact?.hasGitHub}]
     .forEach(c => cc.appendChild(chip("c-chip "+(c.v?"y":"n"),(c.v?"✓ ":"✗ ")+c.l)));
 
-  // Section chips
   const sc=$("sectionChips"); sc.innerHTML="";
   (d.detectedSections||[]).forEach(s=>sc.appendChild(chip("s-chip",s)));
   if(!(d.detectedSections||[]).length) sc.innerHTML='<span style="font-size:.65rem;color:var(--t3)">None detected</span>';
 
-  // Missing sections
   const mc=$("missingChips"); mc.innerHTML="";
   (d.missingSections||[]).forEach(s=>mc.appendChild(chip("m-chip","⚠ "+s)));
   if(!(d.missingSections||[]).length) mc.appendChild(chip("s-chip","None ✓"));
@@ -339,7 +298,6 @@ function buildPanel0(d) {
   $("stSk").textContent  = d.extractedSkills?.length||0;
 }
 
-// ── PANEL 1 ──────────────────────────────────────────
 function buildPanel1(d) {
   const pct=d.keywordMatchPct||0;
   const mt=$("matchTag");
@@ -376,7 +334,6 @@ function buildPanel1(d) {
   if(!(d.extractedSkills||[]).length) sw.innerHTML='<span style="font-size:.72rem;color:var(--t3)">None detected</span>';
 }
 
-// ── PANEL 2 ──────────────────────────────────────────
 function buildPanel2(d) {
   const sl=$("strengthList"); sl.innerHTML="";
   const wl=$("weakList");     wl.innerHTML="";
@@ -402,7 +359,6 @@ function buildPanel2(d) {
   $("baPotV").textContent=pot+"/100";
 }
 
-// ── PANEL 3 ──────────────────────────────────────────
 function buildPanel3(d) {
   const sl=$("suggList"); sl.innerHTML="";
   (d.suggestions||[]).forEach((item,i)=>{
@@ -436,7 +392,6 @@ function buildPanel3(d) {
   };
 }
 
-// ── PANEL 4 ──────────────────────────────────────────
 function buildPanel4(d) {
   $("rolePill").textContent=d.role||"All Roles";
 
@@ -455,18 +410,13 @@ function buildPanel4(d) {
   });
 }
 
-// ═══════════════════════════════════════════════════
-//  TAB / SLIDE NAV
-// ═══════════════════════════════════════════════════
 function buildTabNav() {
-  // Tabs
   document.querySelectorAll(".tab").forEach(btn => {
     const nb=btn.cloneNode(true);
     btn.parentNode.replaceChild(nb,btn);
     nb.addEventListener("click",()=>goTab(parseInt(nb.dataset.tab)));
   });
 
-  // Dots
   const dots=$("snDots"); dots.innerHTML="";
   for(let i=0;i<TABS;i++){
     const d=document.createElement("div"); d.className="sn-dot"+(i===0?" active":"");
@@ -474,7 +424,6 @@ function buildTabNav() {
     dots.appendChild(d);
   }
 
-  // Arrows
   ["slidePrev","slideNext"].forEach(id=>{
     const nb=$(id).cloneNode(true);
     $(id).parentNode.replaceChild(nb,$(id));
@@ -482,7 +431,6 @@ function buildTabNav() {
   $("slidePrev").addEventListener("click",()=>goTab(currentTab-1));
   $("slideNext").addEventListener("click",()=>goTab(currentTab+1));
 
-  // Swipe
   const vp=$("panelsVp"); let tx=0;
   vp.addEventListener("touchstart",e=>tx=e.changedTouches[0].clientX,{passive:true});
   vp.addEventListener("touchend",e=>{ const dx=e.changedTouches[0].clientX-tx; if(Math.abs(dx)>44) goTab(currentTab+(dx<0?1:-1)); });
@@ -496,7 +444,6 @@ function goTab(idx) {
   $("slidePrev").disabled=currentTab===0;
   $("slideNext").disabled=currentTab===TABS-1;
 
-  // Retrigger bar animations when tab becomes visible
   if (!lastResult) return;
   const d=lastResult;
   if (currentTab===0) setTimeout(()=>{ setPct("mbAtsF",d.score); setPct("mbMatchF",d.jobMatchScore); setPct("mbKwF",d.keywordMatchPct); setPct("mbReadF",d.readabilityScore||60); },80);
@@ -507,9 +454,6 @@ function goTab(idx) {
   }
 }
 
-// ═══════════════════════════════════════════════════
-//  DOWNLOAD PDF REPORT
-// ═══════════════════════════════════════════════════
 $("downloadBtn").addEventListener("click", () => {
   if (!lastResult) { toast("Run analysis first.","err"); return; }
   const d=lastResult;
@@ -568,9 +512,6 @@ h2{color:#2563eb;font-size:15px;margin-top:22px;margin-bottom:8px}
   toast("Report downloaded! Open in browser → Print → Save as PDF.","ok");
 });
 
-// ═══════════════════════════════════════════════════
-//  RESET
-// ═══════════════════════════════════════════════════
 $("newAnalysisBtn").addEventListener("click", resetAll);
 
 function resetAll() {
@@ -584,9 +525,6 @@ function resetAll() {
   $("analyzer-section").scrollIntoView({behavior:"smooth"});
 }
 
-// ═══════════════════════════════════════════════════
-//  LIVE COUNTER
-// ═══════════════════════════════════════════════════
 async function fetchCounter() {
   try {
     const res=await fetch(`${API_URL}/counter`);
@@ -599,9 +537,6 @@ function updateCounterDisplay(n) {
   $("counterNum").textContent=n.toLocaleString();
 }
 
-// ═══════════════════════════════════════════════════
-//  LOCAL STORAGE — Recent Analysis
-// ═══════════════════════════════════════════════════
 const LS="rr_result_v5";
 
 function saveLocal(d) {
@@ -622,9 +557,6 @@ function showRecentBanner() {
   } catch {}
 }
 
-// ═══════════════════════════════════════════════════
-//  RESUME BUILDER
-// ═══════════════════════════════════════════════════
 $("unlockBtn").addEventListener("click", () => {
   $("paymentOverlay").style.display="flex";
 });
@@ -730,9 +662,6 @@ ${useAi?`<h2>AI-Suggested Keywords Added</h2><p style="font-size:11px;color:#888
   };
 }
 
-// ═══════════════════════════════════════════════════
-//  ATS TIPS SLIDER
-// ═══════════════════════════════════════════════════
 function initTips() {
   const track=$("tipsTrack");
   const dots=$("tipsDots");
@@ -762,9 +691,6 @@ function initTips() {
   startAuto();
 }
 
-// ═══════════════════════════════════════════════════
-//  UTILITIES
-// ═══════════════════════════════════════════════════
 function show(...ids){ ids.forEach(id=>{ const el=$(id); if(el) el.style.display="block"; }); }
 function hide(...ids){ ids.forEach(id=>{ const el=$(id); if(el) el.style.display="none"; }); }
 
